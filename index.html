@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Обновить приложение</title>
+  <title>Update App</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600&display=swap');
 
@@ -100,14 +100,12 @@
     //  НАСТРОЙКИ — замени на свои ссылки
     // ============================================================
     const IOS_APP_STORE    = 'https://apps.apple.com/app/id6499149591';
-    const ANDROID_PLAY     = 'https://play.google.com/store/apps/details?id=com.example.app';
-    const FALLBACK_URL     = 'https://yoursite.com'; // для десктопа
+    const FALLBACK_URL     = 'https://hoop.expert/'; // для десктопа
     // ============================================================
 
     function getStoreUrl() {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       if (/iPhone|iPad|iPod/i.test(ua) && !window.MSStream) return IOS_APP_STORE;
-      if (/android/i.test(ua)) return ANDROID_PLAY;
       return FALLBACK_URL;
     }
 
@@ -123,8 +121,8 @@
 
   <div class="card">
     <div class="spinner" id="spinner"></div>
-    <h1>Переход в магазин...</h1>
-    <p>Если ничего не произошло, нажмите кнопку ниже</p>
+    <h1>Redirecting to store...</h1>
+    <p>If nothing happened, tap the button below</p>
     <a class="btn" id="fallbackBtn" href="#" onclick="window.location.href=getStoreUrl();return false;">
       Открыть
     </a>
