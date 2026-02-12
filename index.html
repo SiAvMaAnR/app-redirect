@@ -96,12 +96,8 @@
   </style>
 
   <script>
-    // ============================================================
-    //  НАСТРОЙКИ — замени на свои ссылки
-    // ============================================================
     const IOS_APP_STORE    = 'https://apps.apple.com/app/id6499149591';
-    const FALLBACK_URL     = 'https://hoop.expert/'; // для десктопа
-    // ============================================================
+    const FALLBACK_URL     = 'https://hoop.expert/';
 
     function getStoreUrl() {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -109,7 +105,6 @@
       return FALLBACK_URL;
     }
 
-    // Авторедирект через 300мс — даёт WebView время отрендерить страницу
     setTimeout(function() {
       window.location.href = getStoreUrl();
     }, 300);
@@ -124,12 +119,11 @@
     <h1>Redirecting to store...</h1>
     <p>If nothing happened, tap the button below</p>
     <a class="btn" id="fallbackBtn" href="#" onclick="window.location.href=getStoreUrl();return false;">
-      Открыть
+      Open
     </a>
   </div>
 
   <script>
-    // Подставляем правильную ссылку в кнопку
     document.getElementById('fallbackBtn').href = getStoreUrl();
   </script>
 </body>
