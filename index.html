@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обновить приложение</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background: #0a0a0f;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .bg-glow--blue { background: #007AFF; top: -200px; left: -100px; }
+    .bg-glow--purple { background: #AF52DE; bottom: -200px; right: -100px; }
+
+    .card {
+      position: relative;
+      text-align: center;
+      padding: 48px 36px;
+      max-width: 380px;
+      width: 90%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      backdrop-filter: blur(40px);
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 24px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: #007AFF;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .card h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #007AFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn:active { transform: scale(0.97); background: #0066d6; }
+
+    .hidden { display: none; }
+  </style>
+
+  <script>
+    // ============================================================
+    //  НАСТРОЙКИ — замени на свои ссылки
+    // ============================================================
+    const IOS_APP_STORE    = 'https://apps.apple.com/app/id123456789';
+    const ANDROID_PLAY     = 'https://play.google.com/store/apps/details?id=com.example.app';
+    const FALLBACK_URL     = 'https://yoursite.com'; // для десктопа
+    // ============================================================
+
+    function getStoreUrl() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      if (/iPhone|iPad|iPod/i.test(ua) && !window.MSStream) return IOS_APP_STORE;
+      if (/android/i.test(ua)) return ANDROID_PLAY;
+      return FALLBACK_URL;
+    }
+
+    // Авторедирект через 300мс — даёт WebView время отрендерить страницу
+    setTimeout(function() {
+      window.location.href = getStoreUrl();
+    }, 300);
+  </script>
+</head>
+<body>
+  <div class="bg-glow bg-glow--blue"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+
+  <div class="card">
+    <div class="spinner" id="spinner"></div>
+    <h1>Переход в магазин...</h1>
+    <p>Если ничего не произошло, нажмите кнопку ниже</p>
+    <a class="btn" id="fallbackBtn" href="#" onclick="window.location.href=getStoreUrl();return false;">
+      Открыть
+    </a>
+  </div>
+
+  <script>
+    // Подставляем правильную ссылку в кнопку
+    document.getElementById('fallbackBtn').href = getStoreUrl();
+  </script>
+</body>
+</html>
